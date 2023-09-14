@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Student_departaments_EF.Database;
 
@@ -11,9 +12,11 @@ using Student_departaments_EF.Database;
 namespace Student_departaments_EF.Migrations
 {
     [DbContext(typeof(DepartaentContext))]
-    partial class DepartaentContextModelSnapshot : ModelSnapshot
+    [Migration("20230914162013_initSetup")]
+    partial class initSetup
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -105,7 +108,7 @@ namespace Student_departaments_EF.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("DepartamentId")
+                    b.Property<Guid>("DepartamentId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("FirstName")
@@ -126,9 +129,6 @@ namespace Student_departaments_EF.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("DepartamentId");
-
-                    b.HasIndex("FullName")
-                        .IsUnique();
 
                     b.ToTable("StudentModel");
                 });
@@ -175,7 +175,9 @@ namespace Student_departaments_EF.Migrations
                 {
                     b.HasOne("Student_departaments_EF.Models.DepartamentModel", "DepartamentModel")
                         .WithMany("StudentModels")
-                        .HasForeignKey("DepartamentId");
+                        .HasForeignKey("DepartamentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("DepartamentModel");
                 });

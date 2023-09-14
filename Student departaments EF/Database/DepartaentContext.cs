@@ -52,6 +52,10 @@ namespace Student_departaments_EF.Database
                 .HasOne<StudentModel>(sl => sl.StudentModel)
                 .WithMany(s => s.LectureStudentModels)
                 .HasForeignKey(sl => sl.StudentIModelId);
+            
+            modelBuilder.Entity<StudentModel>()
+                .HasIndex(s => s.FullName)
+                .IsUnique();
 
             // OtM
             modelBuilder.Entity<StudentModel>()

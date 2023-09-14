@@ -28,13 +28,11 @@ namespace Student_departaments_EF.Models
             Name = name;
             Description = description;
         }
+        public LectureModel() { }
         public string GetLecture()
         {
             return $"'{Name}' - '{Description}' ";
         }
-        public Guid GetId()
-        {
-            return Id;
-        }
+
     }
 }

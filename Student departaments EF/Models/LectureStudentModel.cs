@@ -12,5 +12,13 @@ namespace Student_departaments_EF.Models
         public Guid StudentIModelId { get; set; }
         public LectureModel LectureModel { get; set; }
         public StudentModel StudentModel { get; set; }
+
+        public LectureStudentModel(LectureModel lectureModel, StudentModel studentModel)
+        {
+            LectureModel = lectureModel;
+            StudentModel = studentModel;
+        }
+
+        public LectureStudentModel() { }
     }
 }

@@ -12,8 +12,8 @@ using Student_departaments_EF.Database;
 namespace Student_departaments_EF.Migrations
 {
     [DbContext(typeof(DepartaentContext))]
-    [Migration("20230914151421_initSetup")]
-    partial class initSetup
+    [Migration("20230914174343_StudentNullableDepartament")]
+    partial class StudentNullableDepartament
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -108,7 +108,7 @@ namespace Student_departaments_EF.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("DepartamentId")
+                    b.Property<Guid?>("DepartamentId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("FirstName")
@@ -175,9 +175,7 @@ namespace Student_departaments_EF.Migrations
                 {
                     b.HasOne("Student_departaments_EF.Models.DepartamentModel", "DepartamentModel")
                         .WithMany("StudentModels")
-                        .HasForeignKey("DepartamentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DepartamentId");
 
                     b.Navigation("DepartamentModel");
                 });

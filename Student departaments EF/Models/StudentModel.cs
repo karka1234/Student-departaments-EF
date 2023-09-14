@@ -24,10 +24,18 @@ namespace Student_departaments_EF.Models
         public string FullName { get; set; }
         //departament risys
         [ForeignKey("Departament")]
-        public Guid DepartamentId { get; set; }
+        public Guid? DepartamentId { get; set; }
         public DepartamentModel DepartamentModel { get; set; }
         //lecture risys
         public List<LectureStudentModel> LectureStudentModels { get; set; } = new List<LectureStudentModel>();
+        public StudentModel(Guid departamentId, string firstName, string lastName)
+        {
+            Id = Guid.NewGuid();
+            FirstName = firstName;
+            LastName = lastName;
+            FullName = $"{FirstName} {LastName}";
+            DepartamentId = departamentId;
+        }
         public StudentModel(string firstName, string lastName)
         {
             Id = Guid.NewGuid();
@@ -35,18 +43,12 @@ namespace Student_departaments_EF.Models
             LastName = lastName;
             FullName = $"{FirstName} {LastName}";
         }
+        public StudentModel() { }
         public string GetStudent()
         {
-            return $"'{FullName}' - '{DepartamentModel.Name}'";
+            return $"'{FullName}'";
         }
-        public Guid GetId()
-        { 
-            return Id;
-        }
-        public Guid GetDepartamentId()
-        { 
-            return DepartamentModel.Id;
-        }
+
 
 
 

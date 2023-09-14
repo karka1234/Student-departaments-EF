@@ -17,5 +17,14 @@ namespace Student_departaments_EF.Models
         public DepartamentModel DepartamentModel { get; set; }
         public LectureModel LectureModel { get; set; }
 
+        public DepartamentLectureModel(DepartamentModel departamentModel, LectureModel lectureModel)
+        {
+            DepartamentModel = departamentModel;
+            LectureModel = lectureModel;
+        }
+
+        public DepartamentLectureModel()
+        {
+        }
     }
 }

@@ -33,13 +33,11 @@ namespace Student_departaments_EF.Models
             Description = description;
             Address = address;
         }
+        public DepartamentModel() { }
         public string GetDepartament()
         {
             return $"'{Name}' - '{Description}' ({Address})";
         }
-        public Guid GetId()
-        {
-            return Id;
-        }
+
     }
 }
