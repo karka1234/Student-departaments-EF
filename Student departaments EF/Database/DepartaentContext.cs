@@ -17,7 +17,6 @@ namespace Student_departaments_EF.Database
 
         public DbSet<DepartamentLectureModel> DepartamentLectureModels { get; set; }
         public DbSet<LectureStudentModel> LectureStudentModels { get; set; }
-        
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

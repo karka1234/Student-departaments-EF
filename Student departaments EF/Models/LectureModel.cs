@@ -18,14 +18,23 @@ namespace Student_departaments_EF.Models
         public string Name { get; set; }
         [MaxLength(500)]
         public string Description { get; set; }
-
+        //departament risys
         public List<DepartamentLectureModel> DepartamentLectureModels { get; set; } = new List<DepartamentLectureModel>();
-
-
-
+        //student risys
         public List<LectureStudentModel> LectureStudentModels { get; set; } = new List<LectureStudentModel>();
-
-
-
+        public LectureModel(string name, string description)
+        {
+            Id = Guid.NewGuid();
+            Name = name;
+            Description = description;
+        }
+        public string GetLecture()
+        {
+            return $"'{Name}' - '{Description}' ";
+        }
+        public Guid GetId()
+        {
+            return Id;
+        }
     }
 }

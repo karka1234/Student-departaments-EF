@@ -22,11 +22,24 @@ namespace Student_departaments_EF.Models
         public string Description { get; set; }
         [MaxLength(100)]
         public string Address { get; set; }
+        //student risys
         public List<StudentModel> StudentModels { get; set; } = new List<StudentModel>();
-
-
+        //lecture risys
         public List<DepartamentLectureModel> DepartamentLectureModels { get; set; } = new List<DepartamentLectureModel>();
-
-
+        public DepartamentModel(string name, string description, string address)
+        {
+            Id = Guid.NewGuid();
+            Name = name;
+            Description = description;
+            Address = address;
+        }
+        public string GetDepartament()
+        {
+            return $"'{Name}' - '{Description}' ({Address})";
+        }
+        public Guid GetId()
+        {
+            return Id;
+        }
     }
 }

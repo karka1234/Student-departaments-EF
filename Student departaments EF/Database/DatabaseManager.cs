@@ -9,12 +9,12 @@ namespace Student_departaments_EF.Database
 {
     internal class DatabaseManager
     {
-        private readonly DatabaseConfig _config;
-        public DatabaseManager(DatabaseConfig config)
-        {
-            _config = config;
-        }
+        private readonly string _config = DatabaseConfig.connString;
 
+        public static void AddDepartament()
+        { 
+        
+        }
 
         //manageris kuris leis prideti dalykus i db
     }

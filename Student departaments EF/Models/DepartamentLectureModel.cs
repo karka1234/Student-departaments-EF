@@ -14,8 +14,8 @@ namespace Student_departaments_EF.Models
         public Guid DepartamentModelId { get; set; }
         public Guid LectureModelId { get; set; }
 
-        public DepartamentModel DepartamentModel { get; set; } = new DepartamentModel();
-        public LectureModel LectureModel { get; set; } = new LectureModel();
+        public DepartamentModel DepartamentModel { get; set; }
+        public LectureModel LectureModel { get; set; }
 
     }
 }

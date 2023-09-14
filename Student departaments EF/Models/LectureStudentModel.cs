@@ -10,7 +10,7 @@ namespace Student_departaments_EF.Models
     {
         public Guid LectureModelId { get; set; }
         public Guid StudentIModelId { get; set; }
-        public LectureModel LectureModel { get; set; } = new LectureModel();
-        public StudentModel StudentModel { get; set; } = new StudentModel();
+        public LectureModel LectureModel { get; set; }
+        public StudentModel StudentModel { get; set; }
     }
 }
