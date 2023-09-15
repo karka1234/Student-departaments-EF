@@ -81,7 +81,7 @@ namespace Student_departaments_EF.Database
                     if (student != null)
                     {
                         DepartamentLectureModel model = context.DepartamentLectureModels.FirstOrDefault(x => x.DepartamentModelId == departament.Id && x.LectureModelId == lecture.Id);
-                        if (model == null)
+                        if (model != null)
                         {
                             context.LectureStudentModels.Add(new LectureStudentModel(lecture, student));
                         }
@@ -121,7 +121,7 @@ namespace Student_departaments_EF.Database
             StringBuilder stringBuilder = new StringBuilder();
             foreach (DepartamentModel departament in departaments)
             {
-                stringBuilder.AppendLine(departament.GetDepartament() + " Lectures:");
+                stringBuilder.AppendLine(departament.GetDepartament() + "\r\n  Lectures:");
                 foreach (var lecture in departament.DepartamentLectureModels)
                 {
                     stringBuilder.AppendLine($"\t\t{lecture.LectureModel.GetLecture()}");
@@ -139,7 +139,7 @@ namespace Student_departaments_EF.Database
             stringBuilder.AppendLine("Student: ");
             foreach (StudentModel student in studentLectures)
             {
-                stringBuilder.AppendLine("\t" + student.GetStudent() + " Lectures:");
+                stringBuilder.AppendLine("\t" + student.GetStudent() + "\r\n  Lectures:");
                 foreach (var lecture in student.LectureStudentModels)
                 {
                     stringBuilder.AppendLine($"\t\t{lecture.LectureModel.GetLecture()}");
