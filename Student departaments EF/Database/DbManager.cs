@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Student_departaments_EF.Database;
 using Student_departaments_EF.Database.EF;
+using Student_departaments_EF.Language;
 using Student_departaments_EF.Models;
 using System;
 using System.Collections.Generic;
@@ -13,20 +14,31 @@ namespace Student_departaments_EF.Database
     internal class DbManager
     {
         private readonly string _config = DatabaseConfig.connString;
+        private readonly IOutStrings _strings;
 
-        public static void AddDepartament(string name, string description, string address)
+        public DbManager(IOutStrings languageConfig)
+        {
+            _strings = languageConfig;
+        }
+
+        public static void testPrint()
+        {
+            Console.WriteLine();
+        }
+
+        public void AddDepartament(string name, string description, string address)
         {
             using var context = new DepartaentContext();
             context.DepartamentModels.Add(new DepartamentModel(name,description,address));
             context.SaveChanges();
         }
-        public static void AddLecture(string name, string description)
+        public void AddLecture(string name, string description)
         {
             using var context = new DepartaentContext();
             context.LectureModels.Add(new LectureModel(name,description));
             context.SaveChanges();
         }
-        public static void AddStudent(string firstName, string lastName, string departamentName = null)
+        public void AddStudent(string firstName, string lastName, string departamentName = null)
         {
             DepartamentModel departament = new DepartamentModel();
             using var context = new DepartaentContext();
@@ -36,7 +48,7 @@ namespace Student_departaments_EF.Database
                     departament = context.DepartamentModels.Where(x => x.Name.ToUpper() == departamentName.ToUpper()).FirstOrDefault();
                     context.StudentModels.Add(new StudentModel(departament.Id, firstName, lastName));
                 }
-                else Console.WriteLine($"There is no departament with {departamentName} ID");
+                else Console.WriteLine(_strings.erroNoDepartament(departamentName));
             else
             {
                 context.StudentModels.Add(new StudentModel(firstName, lastName));
@@ -44,7 +56,7 @@ namespace Student_departaments_EF.Database
             context.SaveChanges();
         }
 
-        public static void AddLectureToDepartament(string lectureName, string departamentName)
+        public void AddLectureToDepartament(string lectureName, string departamentName)
         {
             using var context = new DepartaentContext();
             
@@ -59,16 +71,16 @@ namespace Student_departaments_EF.Database
                     {
                         context.DepartamentLectureModels.Add(new DepartamentLectureModel(departament, lecture));                        
                     }
-                    else Console.WriteLine($"Relation between {departament.Id} {lecture.Id} already exists");
+                    else Console.WriteLine(_strings.errorRelationDepLecExists(departament.Id, lecture.Id));
                 }
-                else Console.WriteLine($"There is no lecture with {lectureName}");
+                else Console.WriteLine(_strings.errorNoLecture(lectureName));
             }
             context.SaveChanges();
         }
 
 
         //add lecture to student
-        public static void AddLectureToStudent(string lectureName, string studentFullName)
+        public void AddLectureToStudent(string lectureName, string studentFullName)
         {
             using var context = new DepartaentContext();
             LectureModel lecture = context.LectureModels.FirstOrDefault(x => x.Name.ToUpper() == lectureName.ToUpper());            
@@ -85,7 +97,7 @@ namespace Student_departaments_EF.Database
                         {
                             context.LectureStudentModels.Add(new LectureStudentModel(lecture, student));
                         }
-                        else Console.WriteLine($"Lecture {lectureName} not exists in Departament {departament.Name}");
+                        else Console.WriteLine(_strings.errorLecNotExistsInDep(lectureName, departament.Name));
                     }
                     else Console.WriteLine($"There is no student with {studentFullName}");
                 }
@@ -95,7 +107,7 @@ namespace Student_departaments_EF.Database
             context.SaveChanges();
         }
 
-        public static void AddStudentToDepartament(string departamentName, string studentFullName)
+        public void AddStudentToDepartament(string departamentName, string studentFullName)
         {
             using var context = new DepartaentContext();
             DepartamentModel departament = context.DepartamentModels.FirstOrDefault(x => x.Name.ToUpper() == departamentName.ToUpper());
@@ -112,9 +124,28 @@ namespace Student_departaments_EF.Database
             context.SaveChanges();
         }
 
+        public void AddOrChangeStudentDepartament(string newDepartamentName, string studentFullName)
+        {
+            using var context = new DepartaentContext();
+            DepartamentModel departament = context.DepartamentModels.FirstOrDefault(x => x.Name.ToUpper() == newDepartamentName.ToUpper());
+            StudentModel student = context.StudentModels.FirstOrDefault(x => x.FullName.ToUpper() == studentFullName.ToUpper());
+            List<LectureStudentModel> studentLectures = context.LectureStudentModels.Where(ls=>ls.StudentIModelId == student.Id).ToList();
+            if (departament != null)
+            {
+                if (student != null)
+                {
+                    if(studentLectures != null)
+                        context.LectureStudentModels.RemoveRange(studentLectures);
+                    student.DepartamentModel = departament;
+                }
+                else Console.WriteLine($"There is no student {studentFullName}");
+            }
+            else Console.WriteLine($"There is no departament {newDepartamentName}");
+            context.SaveChanges();
+        }
 
 
-        public static string GetAllDepartamentsAndLectures()
+        public string GetAllDepartamentsAndLectures()
         {            
             using var context = new DepartaentContext();
             var departaments = context.DepartamentModels.Include(dl => dl.DepartamentLectureModels).ThenInclude(l => l.LectureModel);
@@ -131,7 +162,7 @@ namespace Student_departaments_EF.Database
             return stringBuilder.ToString();
         }
 
-        public static string GetAllStudentsLectures()
+        public string GetAllStudentsLectures()
         {
             using var context = new DepartaentContext();
             var studentLectures = context.StudentModels.Include(dl => dl.LectureStudentModels).ThenInclude(l => l.LectureModel);
@@ -148,6 +179,11 @@ namespace Student_departaments_EF.Database
             }
             return stringBuilder.ToString();
         }
+
+        
+        
+
+
     }
 }
 //var query= db.Categories.Where(c=>c.Category_ID==cat_id).SelectMany(c=>Articles);

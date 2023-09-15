@@ -1,4 +1,5 @@
 ﻿using Student_departaments_EF.Database;
+using Student_departaments_EF.Language;
 using Student_departaments_EF.Models.UI;
 
 namespace Student_departaments_EF
@@ -7,11 +8,14 @@ namespace Student_departaments_EF
     {
         static void Main(string[] args)//su studentu priskyrimu poaskaitom kazkas bvlogai
         {
-            IStudentDepartamentService service = new StudentDepartamentService();
+            IOutStrings lang = new OutStringsEnglish();
+            DbManager dbManager = new DbManager(lang);
+            IStudentDepartamentService service = new StudentDepartamentService(lang, dbManager);
+            
             service.Run();
 
 
-
+            //Console.WriteLine(dbManager.GetAllStudentsLectures());
         }
 
         static void TestingMethods()
@@ -22,6 +26,10 @@ namespace Student_departaments_EF
             DbManager.AddLecture("Lecture name", "Lecture description");
             DbManager.AddLectureToDepartament("Lecture name", "Existing departament name");
             DbManager.AddLectureToStudent("Lecture name", "First name Last name");
+
+            DbManager.ChangeStudentDepartament("Inžinerijos departamentas", "Jonas Jonaitis");
+            
+            DbManager.AddLectureToStudent("Elektronika", "Jonas Jonaitis");
             */
         }
 
@@ -36,7 +44,7 @@ namespace Student_departaments_EF
             DbManager.AddLectureToDepartament("Lecture name", "Existing departament name");
             DbManager.AddLectureToStudent("Lecture name", "First name Last name"); //lecture turi egzistuoti departamante
             */
-
+            /*
             // Pridedame 3 departamentus
             DbManager.AddDepartament("Informatikos departamentas", "Departamentas skirtas IT ir programavimo mokymui", "Vilniaus g. 1");
             DbManager.AddDepartament("Humanitarinių mokslų departamentas", "Departamentas skirtas literatūrai, filosofijai ir kalboms", "Kauno g. 2");
@@ -86,6 +94,7 @@ namespace Student_departaments_EF
             DbManager.AddLectureToStudent("Tinklai", "Jonas Jonaitis");
             DbManager.AddLectureToStudent("Istorija", "Petras Petraitis");
             DbManager.AddLectureToStudent("Statyba", "Ona Onutė");
+            */
         }
     }
 }
