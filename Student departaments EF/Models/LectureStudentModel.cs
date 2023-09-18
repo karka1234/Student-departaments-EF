@@ -15,8 +15,8 @@ namespace Student_departaments_EF.Models
 
         public LectureStudentModel(LectureModel lectureModel, StudentModel studentModel)
         {
-            LectureModel = lectureModel;
             StudentModel = studentModel;
+            LectureModel = lectureModel;            
         }
 
         public LectureStudentModel() { }

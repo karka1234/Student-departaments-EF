@@ -10,7 +10,7 @@ namespace Student_departaments_EF.Language
     {
         public string departamentName { get; }
         public string description { get; }
-        public string address { get; } 
+        public string address { get; }
         public string firstName { get; }
         public string lastName { get; }
         public string lectureName { get; }
@@ -31,7 +31,14 @@ namespace Student_departaments_EF.Language
         public string getMenu();
         public string erroNoDepartament(string departamentName);
         public string errorRelationDepLecExists(Guid departamentId, Guid lectureId);
+        public string errorRelationStudLecExists(Guid student, Guid lectureId);
         public string errorNoLecture(string lectureName);
         public string errorLecNotExistsInDep(string lecName, string depName);
+        public string errorNoStudent(string studentFullName);
+        public string errorNoStudentDepartament();
+        public string lectures { get; }
+        public string students { get; }
+        public string departaments { get; }
+        public string studentDepratament { get; }
     }
 }

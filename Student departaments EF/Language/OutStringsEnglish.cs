@@ -28,6 +28,7 @@ namespace Student_departaments_EF.Language
         public string showAllDepartamentsWithLectures { get; } = "Show all departaments with lectures";
 
         public string showallStudentsWithLectures { get; } = "Show all students with lectures";
+        public string showallStudentsDepartaments { get; } = "Show all students departaments";
 
         public string getMenu()
         {
@@ -40,6 +41,7 @@ namespace Student_departaments_EF.Language
             sb.AppendLine("6. " + addOrChangeStudentDepartament);
             sb.AppendLine("7. " + showAllDepartamentsWithLectures);
             sb.AppendLine("8. " + showallStudentsWithLectures);
+            sb.AppendLine("9. " + showallStudentsDepartaments);
             return sb.ToString();
         }
 
@@ -52,6 +54,10 @@ namespace Student_departaments_EF.Language
         {
             return $"Relation between {departamentId} {lectureId} already exists";
         }
+        public string errorRelationStudLecExists(Guid student, Guid lectureId)
+        {
+            return $"Relation between {student} {lectureId} already exists";
+        }
         public string errorNoLecture(string lectureName)
         {
             return $"There is no lecture {lectureName}";
@@ -61,5 +67,17 @@ namespace Student_departaments_EF.Language
         {
             return $"Lecture {lecName} not exists in Departament {depName}";
         }
+        public string errorNoStudent(string studentFullName)
+        {
+            return $"There is no student with {studentFullName}";
+        }
+        public string errorNoStudentDepartament()
+        {
+            return $"Student dont have departament";
+        }
+        public string lectures { get; } = "Lectures";
+        public string students { get; } = "Students";
+        public string departaments { get; } = "Departaments";
+        public string studentDepratament { get; } = "Students and Departaments";
     }
 }

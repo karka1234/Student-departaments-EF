@@ -1,22 +1,23 @@
 ﻿using Student_departaments_EF.Database;
 using Student_departaments_EF.Language;
 using Student_departaments_EF.Models.UI;
+using System.Globalization;
 
 namespace Student_departaments_EF
 {
     internal class Program
     {
-        static void Main(string[] args)//su studentu priskyrimu poaskaitom kazkas bvlogai
+        static void Main(string[] args)
         {
+           // Thread.CurrentThread.CurrentUICulture = new CultureInfo("lt-LT");
             IOutStrings lang = new OutStringsEnglish();
             DbManager dbManager = new DbManager(lang);
-            IStudentDepartamentService service = new StudentDepartamentService(lang, dbManager);
-            
+            IStudentDepartamentService service = new StudentDepartamentService(lang, dbManager);            
             service.Run();
-
-
-            //Console.WriteLine(dbManager.GetAllStudentsLectures());
         }
+
+
+
 
         static void TestingMethods()
         {
@@ -36,6 +37,8 @@ namespace Student_departaments_EF
         static void SteupDataUpload()
         {           
             /*
+             * Chart gpt užklausa
+             * 
             Pagal šiuos aprasymus surasyk i parametru vitas belekokius sugalvotas logiskas reiksmes. Taip pat atkreipk demesi kad yra rysiai. Kur parasyta Departament name tai ten kur yra Existing departament name turi buti toks pat pavadinimas. Sukurk 3 departamentus, 4 studentu kurie priskirti departamentams atsitiktine tvarka, sukurk 9 paskaitas jas taip pat priskirk atsitiktine tvarka kad studentas turetu bent po keleta paskaitu
             DbManager.AddDepartament("Departament name", "Departament description ", "Adress");
             DbManager.AddStudent("First name", "Last name", "Existing departament name");
