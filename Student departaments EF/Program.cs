@@ -7,17 +7,17 @@ using System.Text;
 namespace Student_departaments_EF
 {
     internal class Program
-    {
+    {//regex ir guid
         static void Main(string[] args)
         {
             Console.InputEncoding = Encoding.Unicode;
             Console.OutputEncoding = Encoding.Unicode;
-            // Thread.CurrentThread.CurrentUICulture = new CultureInfo("lt-LT");
             IOutStrings lang = new OutStringsEnglish();
             DbManager dbManager = new DbManager(lang);
             IStudentDepartamentService service = new StudentDepartamentService(lang, dbManager);            
             service.Run();
         }
+
 
 
 
@@ -40,7 +40,7 @@ namespace Student_departaments_EF
         static void SteupDataUpload()
         {           
             /*
-             * Chart gpt užklausa
+             * Chat gpt užklausa
              * 
             Pagal šiuos aprasymus surasyk i parametru vitas belekokius sugalvotas logiskas reiksmes. Taip pat atkreipk demesi kad yra rysiai. Kur parasyta Departament name tai ten kur yra Existing departament name turi buti toks pat pavadinimas. Sukurk 3 departamentus, 4 studentu kurie priskirti departamentams atsitiktine tvarka, sukurk 9 paskaitas jas taip pat priskirk atsitiktine tvarka kad studentas turetu bent po keleta paskaitu
             DbManager.AddDepartament("Departament name", "Departament description ", "Adress");

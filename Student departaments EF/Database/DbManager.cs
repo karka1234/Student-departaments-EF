@@ -29,6 +29,7 @@ namespace Student_departaments_EF.Database
         {
             if (name == null || description == null || address == null)
                 return;
+
             using var context = new DepartaentContext();
             context.DepartamentModels.Add(new DepartamentModel(name,description,address));
             context.SaveChanges();
@@ -227,7 +228,7 @@ namespace Student_departaments_EF.Database
             int lineCounter = showLineCounterMax;
             foreach (DepartamentModel dep in departaments)
             {
-                if (lineCounter > 0)
+                if (lineCounter >= 0)
                 {
                     stringBuilder.Append($" '{dep.Name}', ");
                     lineCounter--;
@@ -250,7 +251,7 @@ namespace Student_departaments_EF.Database
             int lineCounter = showLineCounterMax;
             foreach (LectureModel lecture in lectures)
             {
-                if (lineCounter > 0)
+                if (lineCounter >= 0)
                 {
                     stringBuilder.Append($" '{lecture.Name}', ");
                     lineCounter--;
