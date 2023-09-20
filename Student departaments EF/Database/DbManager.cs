@@ -41,7 +41,7 @@ namespace Student_departaments_EF.Database
             context.LectureModels.Add(new LectureModel(name,description));
             context.SaveChanges();
         }
-        public void AddStudent(string firstName, string lastName, string departamentName = null)//padaryt pridejima ir su departamentu
+        public void AddStudent(string firstName, string lastName, string departamentName = null)
         {
             if (firstName == null || lastName == null)
                 return;
@@ -204,7 +204,7 @@ namespace Student_departaments_EF.Database
             int lineCounter = showLineCounterMax;
             foreach (StudentModel student in students)
             {
-                if (lineCounter > 0)
+                if (lineCounter >= 0)
                 {
                     stringBuilder.Append($" '{student.FullName}', ");
                     lineCounter--;

@@ -23,7 +23,7 @@ namespace Student_departaments_EF.Models.UI
         {
             char selection;
             string fullNameTemp;
-            while (true) //spauysdint departamentus ar reikalingus sarassu konsoles apacioje
+            while (true)
             {                
                 Console.Clear();
                 Console.WriteLine(_strings.programHeader);

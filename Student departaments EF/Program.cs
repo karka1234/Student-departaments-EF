@@ -2,6 +2,7 @@
 using Student_departaments_EF.Language;
 using Student_departaments_EF.Models.UI;
 using System.Globalization;
+using System.Text;
 
 namespace Student_departaments_EF
 {
@@ -9,7 +10,9 @@ namespace Student_departaments_EF
     {
         static void Main(string[] args)
         {
-           // Thread.CurrentThread.CurrentUICulture = new CultureInfo("lt-LT");
+            Console.InputEncoding = Encoding.Unicode;
+            Console.OutputEncoding = Encoding.Unicode;
+            // Thread.CurrentThread.CurrentUICulture = new CultureInfo("lt-LT");
             IOutStrings lang = new OutStringsEnglish();
             DbManager dbManager = new DbManager(lang);
             IStudentDepartamentService service = new StudentDepartamentService(lang, dbManager);            
