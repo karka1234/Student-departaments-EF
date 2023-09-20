@@ -16,6 +16,7 @@ namespace Student_departaments_EF
             DbManager dbManager = new DbManager(lang);
             IStudentDepartamentService service = new StudentDepartamentService(lang, dbManager);            
             service.Run();
+            
         }
 
 
@@ -39,17 +40,7 @@ namespace Student_departaments_EF
 
         static void SteupDataUpload()
         {           
-            /*
-             * Chat gpt užklausa
-             * 
-            Pagal šiuos aprasymus surasyk i parametru vitas belekokius sugalvotas logiskas reiksmes. Taip pat atkreipk demesi kad yra rysiai. Kur parasyta Departament name tai ten kur yra Existing departament name turi buti toks pat pavadinimas. Sukurk 3 departamentus, 4 studentu kurie priskirti departamentams atsitiktine tvarka, sukurk 9 paskaitas jas taip pat priskirk atsitiktine tvarka kad studentas turetu bent po keleta paskaitu
-            DbManager.AddDepartament("Departament name", "Departament description ", "Adress");
-            DbManager.AddStudent("First name", "Last name", "Existing departament name");
-            DbManager.AddLecture("Lecture name", "Lecture description");
 
-            DbManager.AddLectureToDepartament("Lecture name", "Existing departament name");
-            DbManager.AddLectureToStudent("Lecture name", "First name Last name"); //lecture turi egzistuoti departamante
-            */
             /*
             // Pridedame 3 departamentus
             DbManager.AddDepartament("Informatikos departamentas", "Departamentas skirtas IT ir programavimo mokymui", "Vilniaus g. 1");

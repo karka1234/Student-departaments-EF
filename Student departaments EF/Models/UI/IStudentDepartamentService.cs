@@ -9,6 +9,6 @@ namespace Student_departaments_EF.Models.UI
     internal interface IStudentDepartamentService
     {
         public void Run();
-
+        public void FillData();
     }
 }
